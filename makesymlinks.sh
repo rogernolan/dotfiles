@@ -30,6 +30,14 @@ for file in $files; do
     ln -s $dir/$file ~/.$file
 done
 
+brew_up() {
+    # install homebrew if we haven't already got it
+    if[-f /usr/local/bin/brew]; then
+        ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+    fi
+}
+
+
 install_zsh () {
 # Test to see if zshell is installed.  If it is:
 if [ -f /bin/zsh -o -f /usr/bin/zsh ]; then
@@ -56,4 +64,5 @@ else
 fi
 }
 
+brew_up
 install_zsh
