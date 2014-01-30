@@ -9,7 +9,7 @@
 dir=~/dotfiles                    # dotfiles directory
 olddir=~/dotfiles_old             # old dotfiles backup directory
 files="bashrc vimrc vim zshrc oh-my-zsh private gitignore_global gitconfig"    # list of files/folders to symlink in homedir
-
+config_files="fish"
 ##########
 
 # create dotfiles_old in homedir
@@ -32,7 +32,7 @@ done
 
 brew_up() {
     # install homebrew if we haven't already got it
-    if[-f /usr/local/bin/brew]; then
+    if [ ! -f /usr/local/bin/brew ]; then
         ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
     fi
 }
