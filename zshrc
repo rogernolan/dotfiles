@@ -81,3 +81,7 @@ NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 
 
 alias gulp="gulp --harmony --harmony_arrow_functions"
+
+
+source ~/.xsh
+
