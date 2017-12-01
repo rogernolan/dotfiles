@@ -69,19 +69,6 @@ bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
 
 
-source /usr/local/bin/virtualenvwrapper.sh
+# source /usr/local/bin/virtualenvwrapper.sh
 
-
-NPM_PACKAGES=/Users/rog/.npm-packages
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-
-. ~/.nvm/nvm.sh
-
-
-alias gulp="gulp --harmony --harmony_arrow_functions"
-
-
-source ~/.xsh
 
