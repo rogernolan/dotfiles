@@ -102,5 +102,9 @@ source ~/Repos/znap/znap.zsh  # Start Znap
         https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
 source ~/Repos/znap/znap.zsh  # Start Znap
 
+znap source marlonrichert/zsh-autocomplete
+
+#
 # Added by Amplify CLI binary installer
+
 export PATH="$HOME/.amplify/bin:$PATH"
