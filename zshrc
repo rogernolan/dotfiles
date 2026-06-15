@@ -65,8 +65,8 @@ fi
 
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+[[ -n "$terminfo[kcuu1]" ]] && bindkey "$terminfo[kcuu1]" history-substring-search-up
+[[ -n "$terminfo[kcud1]" ]] && bindkey "$terminfo[kcud1]" history-substring-search-down
 
 
 # source /usr/local/bin/virtualenvwrapper.sh
@@ -74,7 +74,6 @@ bindkey "$terminfo[kcud1]" history-substring-search-down
 
 alias python="python3"
 alias pip="pip3"
-alias python="python3"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -94,15 +93,12 @@ unset __conda_setup
 [[ -r ~/Repos/znap/znap.zsh ]] ||
     git clone --depth 1 -- \
         https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
+zstyle ':znap:*' auto-compile no
 source ~/Repos/znap/znap.zsh  # Start Znap
 
-# Download Znap, if it's not there yet.
-[[ -r ~/Repos/znap/znap.zsh ]] ||
-    git clone --depth 1 -- \
-        https://github.com/marlonrichert/zsh-snap.git ~/Repos/znap
-source ~/Repos/znap/znap.zsh  # Start Znap
-
-znap source marlonrichert/zsh-autocomplete
+if [[ "$TERM" != dumb ]]; then
+    znap source marlonrichert/zsh-autocomplete
+fi
 
 #
 # Added by Amplify CLI binary installer
