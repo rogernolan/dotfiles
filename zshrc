@@ -100,7 +100,9 @@ if [[ "$TERM" != dumb ]]; then
     znap source marlonrichert/zsh-autocomplete
 fi
 
-#
-# Added by Amplify CLI binary installer
+# Custom tool paths
+export JAVA_HOME=$(/usr/libexec/java_home -v 21)
+export PATH=$PATH:/Applications/OpenSCAD-2021.01.app/Contents/MacOS:/Applications/Inkscape.app/Contents/MacOS
 
-export PATH="$HOME/.amplify/bin:$PATH"
+# opencode
+export PATH=/Users/rog/.opencode/bin:$PATH
