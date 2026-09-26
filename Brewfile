@@ -1,0 +1,18 @@
+brew "bat"
+brew "direnv"
+brew "eza"
+brew "fd"
+brew "fzf"
+brew "gh"
+brew "jq"
+brew "mosh"
+brew "ripgrep"
+brew "rtk"
+brew "shellcheck"
+brew "tmux"
+
+tap "anomalyco/tap"
+brew "anomalyco/tap/opencode"
+
+cask "codex"
+cask "ghostty"

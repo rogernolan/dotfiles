@@ -1,0 +1,30 @@
+[user]
+	name = Rog
+	email = rog@hatbat.net
+
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+
+[init]
+	defaultBranch = main
+
+[pull]
+	rebase = false
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[merge]
+	conflictStyle = zdiff3
+
+[rerere]
+	enabled = true
+
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	last = log -1 HEAD
+	lg = log --oneline --decorate --graph

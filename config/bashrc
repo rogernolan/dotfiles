@@ -1,0 +1,16 @@
+[[ $- == *i* ]] || return 0
+
+export EDITOR=${EDITOR:-vim}
+export VISUAL=${VISUAL:-$EDITOR}
+export HISTCONTROL=ignoreboth
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+
+alias ll='ls -lah'
+alias la='ls -A'
+alias gs='git status'
+alias gd='git diff'
+
+if [[ -r "$HOME/.config/rog/private" ]]; then
+    source "$HOME/.config/rog/private"
+fi
