@@ -1,0 +1,32 @@
+# Operating-system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor and local tooling state
+.idea/
+.vscode/
+.claude/
+.codex/
+
+# Build and dependency output
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+build/
+dist/
+DerivedData/
+xcuserdata/
+Pods/
+
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+
+# Common generated files
+*.log
+*.swp
+*.tmp

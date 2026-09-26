@@ -1,0 +1,63 @@
+# Keep interactive shell startup independent of oh-my-zsh or a vendored plugin tree.
+autoload -Uz compinit
+compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
+
+HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory hist_ignore_dups hist_ignore_space share_history
+setopt auto_cd interactive_comments
+
+export EDITOR=${EDITOR:-vim}
+export VISUAL=${VISUAL:-$EDITOR}
+
+autoload -Uz colors
+colors
+
+dotfiles_git_prompt() {
+    local branch
+
+    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) || \
+        branch=$(git rev-parse --short HEAD 2>/dev/null) || return 0
+
+    if [[ -n "$(git status --porcelain --untracked-files=normal 2>/dev/null)" ]]; then
+        print -r -- " (${branch} ✗)"
+    else
+        print -r -- " (${branch})"
+    fi
+}
+
+setopt prompt_subst
+PROMPT='%F{green}%n%f:%F{cyan}%1~%f$(dotfiles_git_prompt)%F{blue}%#%f '
+
+alias ll='ls -lah'
+alias la='ls -A'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
+alias gl='git log --oneline --decorate --graph'
+alias gp='git push'
+alias gco='git checkout'
+
+if command -v eza >/dev/null 2>&1; then
+    alias ls='eza'
+    alias ll='eza -lah --git'
+fi
+
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
+
+if [[ -t 0 && -t 1 ]]; then
+    for fzf_bindings in /opt/homebrew/opt/fzf/shell/key-bindings.zsh /usr/local/opt/fzf/shell/key-bindings.zsh; do
+        if [[ -r "$fzf_bindings" ]]; then
+            source "$fzf_bindings"
+            break
+        fi
+    done
+fi
+
+if [[ -r "$HOME/.config/rog/private" ]]; then
+    source "$HOME/.config/rog/private"
+fi

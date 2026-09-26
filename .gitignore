@@ -3,3 +3,5 @@ vim/vim
 vim/.netrwhist
 chef/
 private
+.DS_Store
+dotfiles-migration-backups/
