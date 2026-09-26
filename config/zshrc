@@ -11,6 +11,25 @@ setopt auto_cd interactive_comments
 export EDITOR=${EDITOR:-vim}
 export VISUAL=${VISUAL:-$EDITOR}
 
+autoload -Uz colors
+colors
+
+dotfiles_git_prompt() {
+    local branch
+
+    branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) || \
+        branch=$(git rev-parse --short HEAD 2>/dev/null) || return 0
+
+    if [[ -n "$(git status --porcelain --untracked-files=normal 2>/dev/null)" ]]; then
+        print -r -- " (${branch} ✗)"
+    else
+        print -r -- " (${branch})"
+    fi
+}
+
+setopt prompt_subst
+PROMPT='%F{green}%n%f:%F{cyan}%1~%f$(dotfiles_git_prompt)%F{blue}%#%f '
+
 alias ll='ls -lah'
 alias la='ls -A'
 alias gs='git status'
