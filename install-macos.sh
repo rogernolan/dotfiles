@@ -75,6 +75,11 @@ validate_platform() {
 }
 
 discover_brew() {
+    if [[ ${DOTFILES_TEST_MODE:-0} == 1 ]]; then
+        [[ -n "$BREW" ]] || die 'DOTFILES_BREW is required in test mode'
+        [[ -x "$BREW" ]] || die "Homebrew executable is not usable: $BREW"
+        return
+    fi
     if [[ -n "$BREW" ]]; then
         [[ -x "$BREW" ]] || die "Homebrew executable is not usable: $BREW"
         return

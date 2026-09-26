@@ -80,6 +80,21 @@ run_installer() {
         "$INSTALLER" "$@" > "$FIXTURE/output" 2>&1
 }
 
+test_mode_requires_explicit_brew() {
+    make_fixture
+    if DOTFILES_HOME="$HOME_DIR" \
+        DOTFILES_TEST_MODE=1 \
+        FAKE_BREW_LOG="$BREW_LOG" \
+        FAKE_BREW_SATISFIED="$BREW_SATISFIED" \
+        PATH="$BIN:/usr/bin:/bin" \
+        "$INSTALLER" > "$FIXTURE/output" 2>&1; then
+        fail 'test mode accepted a missing DOTFILES_BREW'
+    fi
+    assert_contains 'DOTFILES_BREW is required in test mode' "$FIXTURE/output"
+    [[ ! -s "$BREW_LOG" ]] || fail 'test mode discovered and invoked Homebrew'
+    rm -rf "$FIXTURE"
+}
+
 backup_path() {
     local name=$1
     find "$HOME_DIR/dotfiles-migration-backups" -mindepth 2 -maxdepth 2 -name "$name" -print -quit 2>/dev/null
@@ -153,6 +168,7 @@ test_unmanaged_files_are_backed_up_before_replacement() {
 }
 
 test_dry_run_does_not_mutate
+test_mode_requires_explicit_brew
 test_first_install_backs_up_legacy_links_and_preserves_unrelated_files
 test_second_install_is_idempotent
 test_no_migrate_leaves_private_and_oh_my_zsh_untouched

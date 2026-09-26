@@ -24,14 +24,14 @@ The installer does not manage application state under `~/.config`, SSH keys, cre
 Install Git using the macOS developer tools if necessary, then run:
 
 ```sh
-git clone git@github.com:rogernolan/dotfiles.git ~/dotfiles
+git clone https://github.com/rogernolan/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install-macos.sh --dry-run
 ./install-macos.sh
-exec zsh
+exec zsh -l
 ```
 
-The installer detects Homebrew at `/opt/homebrew/bin/brew` or `/usr/local/bin/brew`. If neither exists, it runs the official Homebrew installer and then installs the declared dependencies. A new shell is required after installation so `zprofile` can initialise Homebrew’s environment.
+The installer detects Homebrew at `/opt/homebrew/bin/brew` or `/usr/local/bin/brew`. If neither exists, it runs the official Homebrew installer and then installs the declared dependencies. Use a login shell after installation so `zprofile` can initialise Homebrew’s environment.
 
 ## Existing Mac migration
 
@@ -46,7 +46,7 @@ Run the migration after reviewing the output:
 
 ```sh
 ./install-macos.sh
-exec zsh
+exec zsh -l
 ```
 
 The installer backs up each replaced path under:

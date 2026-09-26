@@ -13,11 +13,11 @@ xcode-select --install
 Then clone the repository and preview the changes before installing them:
 
 ```sh
-git clone git@github.com:rogernolan/dotfiles.git ~/dotfiles
+git clone https://github.com/rogernolan/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ./install-macos.sh --dry-run
 ./install-macos.sh
-exec zsh
+exec zsh -l
 ```
 
 The installer is safe to rerun. It installs missing entries from `Brewfile` without upgrading or uninstalling unrelated packages. It does not authenticate GitHub, Codex, or OpenCode.
@@ -31,7 +31,7 @@ cd ~/dotfiles
 git pull --ff-only
 ./install-macos.sh --dry-run
 ./install-macos.sh
-exec zsh
+exec zsh -l
 ```
 
 The installer links the shell and tool configuration from this checkout, so the
