@@ -17,6 +17,8 @@
 
 The installer uses symlinks back to this checkout, so editing a tracked configuration file changes the next shell started from that checkout. Homebrew owns installed tools through `Brewfile`; the installer runs `brew bundle install --no-upgrade` only when `brew bundle check` reports missing dependencies.
 
+The managed Zsh configuration enables case-insensitive Tab completion. Its prompt shows a green username, cyan current directory, Git branch (or commit when detached), and `✗` for tracked or untracked changes. New Macs receive these settings through the installed `~/.zshrc` link. Restart an existing shell with `exec zsh -l` to load changes.
+
 Dotfiles owns skill installation. The private [rog-skills repository](https://github.com/rogernolan/rog-skills) owns shared skill content. The installer clones it into `~/Development/rog-skills`, or reuses the checkout at that path, and links each directory containing `skills/<name>/SKILL.md` into both `~/.agents/skills/<name>` and `~/.codex/skills/<name>`. It preserves unrelated installed skills and reports conflicting destinations before moving them into the existing backup directory.
 
 The installer also links `homelab-admin` from `~/Development/tob-lxc-setup/skills/homelab-admin` into both discovery directories. Obtain or restore that checkout separately. If the source directory or `SKILL.md` is missing, the installer reports the path and preserves any installed `homelab-admin` copy. It does not clone or update `tob-lxc-setup`.
@@ -125,6 +127,8 @@ The repository test suite uses temporary homes, fake Homebrew and GitHub command
 cd ~/dotfiles
 bash -n install-macos.sh tests/test_install_macos.sh
 bash tests/test_install_macos.sh
+bash tests/test_zsh_prompt.sh
+python3 tests/test_zsh_completion.py
 shellcheck install-macos.sh tests/test_install_macos.sh
 ```
 

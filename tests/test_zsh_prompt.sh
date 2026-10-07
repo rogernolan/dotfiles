@@ -38,6 +38,12 @@ run_prompt() {
     )
 }
 
+prompt_format=$(HOME="$HOME_DIR" ZDOTDIR="$FIXTURE/zdotdir" \
+    zsh -dfc 'source "$1"; [[ -o promptsubst ]] || exit 1; print -r -- "$PROMPT"' zsh "$ZSHRC")
+# shellcheck disable=SC2016 # Keep the prompt substitution literal for the format assertion.
+assert_equals '%F{green}%n%f:%F{cyan}%1~%f$(dotfiles_git_prompt)%F{blue}%#%f ' \
+    "$prompt_format" 'managed prompt format'
+
 assert_equals '' "$(run_prompt "$HOME_DIR")" 'non-repository prompt segment'
 assert_equals ' (main)' "$(run_prompt "$REPO")" 'clean repository prompt segment'
 
