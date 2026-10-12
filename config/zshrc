@@ -1,7 +1,10 @@
 # Keep interactive shell startup independent of oh-my-zsh or a vendored plugin tree.
 autoload -Uz compinit
 compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+# Prefer prefixes, then allow case-insensitive fragments anywhere in a name.
+zstyle ':completion:*' matcher-list \
+    'm:{a-zA-Z}={A-Za-z}' \
+    'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*'
 
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=10000

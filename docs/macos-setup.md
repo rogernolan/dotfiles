@@ -17,7 +17,7 @@
 
 The installer uses symlinks back to this checkout, so editing a tracked configuration file changes the next shell started from that checkout. Homebrew owns installed tools through `Brewfile`; the installer runs `brew bundle install --no-upgrade` only when `brew bundle check` reports missing dependencies.
 
-The managed Zsh configuration enables case-insensitive Tab completion. Its prompt shows a green username, cyan current directory, Git branch (or commit when detached), and `✗` for tracked or untracked changes. New Macs receive these settings through the installed `~/.zshrc` link. Restart an existing shell with `exec zsh -l` to load changes.
+The managed Zsh configuration enables case-insensitive Tab completion, trying prefixes first and then matching text anywhere in a name. For example, `open .xco` followed by Tab completes to `open Instablog.xcodeproj` when that is the only match. Its prompt shows a green username, cyan current directory, Git branch (or commit when detached), and `✗` for tracked or untracked changes. New Macs receive these settings through the installed `~/.zshrc` link. Restart an existing shell with `exec zsh -l` to load changes.
 
 Dotfiles owns skill installation. The private [rog-skills repository](https://github.com/rogernolan/rog-skills) owns shared skill content. The installer clones it into `~/Development/rog-skills`, or reuses the checkout at that path, and links each directory containing `skills/<name>/SKILL.md` into both `~/.agents/skills/<name>` and `~/.codex/skills/<name>`. It preserves unrelated installed skills and reports conflicting destinations before moving them into the existing backup directory.
 

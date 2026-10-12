@@ -36,7 +36,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="dotfiles-completion-") as fixture:
         home = Path(fixture) / "home"
         home.mkdir()
-        for name in ("MixedCaseDirectory", "lowercase-directory"):
+        for name in ("MixedCaseDirectory", "lowercase-directory", "OtherMixedCaseDirectory", "Instablog.xcodeproj"):
             (home / name).mkdir()
         pid, fd = pty.fork()
         if pid == 0:
@@ -47,6 +47,7 @@ def main():
             setup = (
                 f"source {shlex.quote(str(zshrc))}; "
                 f"cd {shlex.quote(str(home))}; "
+                'open() { print -r -- "OPENED:${1%/}"; }; '
                 "PROMPT='DOTFILES_READY> '; RPROMPT=''; print -r -- STARTED\n"
             )
             os.write(fd, setup.encode())
@@ -59,7 +60,10 @@ def main():
                 os.write(fd, b'print -r -- "COMPLETED:$PWD"\n')
                 read_until(fd, f"COMPLETED:{home / directory}\r\n".encode())
                 os.write(fd, f"cd {shlex.quote(str(home))}\n".encode())
-            print("PASS: case-insensitive Tab completion in both directions")
+            for fragment in (".xco", ".XCO", "STAB"):
+                os.write(fd, f"open {fragment}\t\n".encode())
+                read_until(fd, b"\r\nOPENED:Instablog.xcodeproj\r\n")
+            print("PASS: case-insensitive prefix and substring Tab completion")
         finally:
             os.kill(pid, signal.SIGTERM)
             os.close(fd)
