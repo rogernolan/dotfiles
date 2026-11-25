@@ -28,3 +28,9 @@
 	st = status
 	last = log -1 HEAD
 	lg = log --oneline --decorate --graph
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
