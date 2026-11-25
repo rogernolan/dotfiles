@@ -32,6 +32,8 @@ gh auth status --hostname github.com
 
 Use a GitHub account with access to `rogernolan/rog-skills`. The installer uses GitHub CLI's saved credentials for its Git commands; it never starts a login flow. It installs missing entries from `Brewfile` without upgrading or uninstalling unrelated packages.
 
+The Brewfile includes Claude Code (`claude`), Codex CLI (`codex`), and OpenCode (`opencode`).
+
 The installer clones or reuses `~/Development/rog-skills` and links each `skills/<name>/SKILL.md` directory individually into both `~/.agents/skills/<name>` and `~/.codex/skills/<name>`. Clean checkouts receive fast-forward-only updates; checkouts with local changes are linked without updating. Correct links and unrelated skills are preserved; conflicts are reported and backed up outside skill discovery.
 
 The installer also links `homelab-admin` from `~/Development/tob-lxc-setup/skills/homelab-admin` into both skill directories. Keep that source checkout available; a missing directory or `SKILL.md` produces a warning and preserves any installed copy.
@@ -55,6 +57,7 @@ the installer replaces them. It does not remove unrelated Homebrew packages.
 GitHub authentication is required for private skills installation. After setup, authenticate the other services you use:
 
 ```sh
+claude
 codex
 opencode
 ```

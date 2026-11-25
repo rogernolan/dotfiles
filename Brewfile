@@ -14,5 +14,6 @@ brew "tmux"
 tap "anomalyco/tap"
 brew "anomalyco/tap/opencode"
 
+cask "claude-code"
 cask "codex"
 cask "ghostty"

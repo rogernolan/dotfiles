@@ -94,6 +94,7 @@ When a fresh dry run has no skills checkout, it reports the clone and linking pl
 Complete other account setup separately after installation:
 
 ```sh
+claude
 codex
 opencode
 ```
@@ -106,7 +107,7 @@ Check the package manifest and core commands:
 
 ```sh
 brew bundle check --no-upgrade --file ~/dotfiles/Brewfile
-command -v gh tmux mosh codex opencode
+command -v gh tmux mosh claude codex opencode
 git config --global --get core.excludesfile
 tmux -f ~/.tmux.conf -L dotfiles-verification -C start-server
 tmux -L dotfiles-verification kill-server
